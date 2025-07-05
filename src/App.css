@@ -1,0 +1,115 @@
+
+header,footer{
+  background-color: rgba(60, 69, 67, 0.6);
+}
+
+/*header{*/
+/*    border-radius: 15px 15px 0 0 ;*/
+/*}*/
+/*nav>ul{*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*    position: fixed;*/
+/*    top: 5px;*/
+/*    left: 40px;*/
+/*}*/
+/*nav li{*/
+/*    display: inline-block;*/
+/*    border: 2px solid black;*/
+/*    background-color: rgba(204,3,35,0.5);*/
+/*    cursor: pointer;*/
+/*}*/
+
+h1{
+  text-align: center;
+  font-size: 3em;
+  padding: 0.5em 0;
+  color: #b88007;
+}
+
+/*.left{*/
+/*    float: left;*/
+/*    width: 25%;*/
+/*    box-shadow: 10px 10px 10px #b88007;*/
+/*    margin: 5px 10px 0 5px;*/
+/*}*/
+
+/*.right{*/
+/*    float: right;*/
+/*    width: 40%;*/
+/*    border: 1px solid #b88007;*/
+/*    border-radius: 0 0 15px 15px;*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: space-around;*/
+/*}*/
+
+img{
+  width: 100%;
+  height: auto;
+
+}
+.float-start img{
+  box-shadow: 10px 10px 20px #df840e;
+}
+h2{
+  text-align: center;
+  font-size: 1.5em;
+  margin: 5px;
+  width: 100%;
+  color: #b88007;
+
+}
+
+.farGalaxy{
+  font-size: 1.7em;
+  text-align: justify;
+  line-height: 1.6em;
+}
+
+footer{
+  clear: both;
+  height: 6em;
+  border-radius: 0 0 15px 15px;
+}
+
+
+
+.bottomLeft{
+  border-bottom-left-radius: 1rem;
+
+
+}
+
+.bottomRight{
+  border-bottom-right-radius: 1rem;
+}
+
+.button{
+  display: inline-block;
+  cursor: pointer;
+  border: 2px solid black;
+  background-color: rgba(204,3,35,0.5);
+  cursor: pointer;
+}
+.email {
+  font-size: 1.2em;
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: capitalize;
+}
+
+.button{
+  position: absolute;
+  right: 65%;
+  margin: 20px;
+  padding: 5px;
+}
+.btn-danger{
+  color: #b88007;
+  background-color: rgba(135, 6, 6, 0.73);
+  border: 2px solid black;
+}
+
+.border{
+  border-color: #eedb00 !important;
+}
