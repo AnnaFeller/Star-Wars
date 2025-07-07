@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {base_url} from "../utils/constant.js";
 
 const OpeningCrawl = () => {
     const [openingCrawl, setOpeningCraw] = useState('Loading...')
