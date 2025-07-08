@@ -1,4 +1,5 @@
-export const navItems = ['Home', 'About me', 'Star Wars', 'Contact' ];//можно доьавить пункт меню
+export const navItems = ['Home', 'About me', 'Star Wars', 'Contact' ];
+// можно доьавить пункт меню
 export const openingCrawl = ' It is a period of civil war.\n' +
     '                Rebel spaceships, striking\n' +
     '                from a hidden base, have won\n' +
