@@ -2,19 +2,41 @@ import React, {useEffect, useState} from 'react';
 
 const Contact = () => {
 
-    const [planets, setPlanetName] = useState([])
+    const [planets, setPlanets] = useState(() => {
+        const localData = localStorage.getItem("planets");
+        if (localData) {
+            const storeDate = JSON.parse(localData)
+            const time = Date.now()
+            const days = 30*24*60*60*1000
+
+            if(time - storeDate.timestamp < days){
+                return storeDate.planets
+            }
+        }
+          return []
+    });
     // const [loading, setLoading] = useState(true);
 
 
     async function getPlanets() {
         const res = await fetch(`https://sw-info-api.herokuapp.com/v1/planets`)
         const data = await res.json()
-        setPlanetName(data.map(item => item.name ))
+        setPlanets(data.map(item => item.name ))
     }
 
     useEffect( () => {
             getPlanets().then(() => console.log('Were loaded'))
          }, [])
+
+    useEffect( () => {
+        localStorage.setItem('planets', JSON.stringify({
+            planets:planets,
+            timestamp:Date.now()
+        }))
+    }, [planets])
+
+
+
 
 
             // .then(res => res.json())
@@ -51,9 +73,9 @@ const Contact = () => {
 
                 <label htmlFor="country">Planet</label>
                 <select id="country" name="country">
-                    {planets.map((planetName, index) => (
-                        <option key={index} value={planetName}>
-                            {planetName}
+                    {planets.map((planet, index) => (
+                        <option key={index} value={planet}>
+                            {planet}
                         </option>
                     ))}
                 </select>

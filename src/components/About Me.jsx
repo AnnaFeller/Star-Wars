@@ -1,20 +1,41 @@
 import React, {useEffect, useState} from 'react';
 
-const AboutMe = () => {
-    const [heroName, setHeroName] = useState('')
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        const id = Math.floor(Math.random() * 10) + 1
-        fetch(`https://sw-info-api.herokuapp.com/v1/peoples/${id}`)
-            .then(res => res.json())
-            .then(data => { setHeroName(data) ; setLoading(false) })
-            .catch(err => {
-                console.log(err)
-                setHeroName('ERROR')
-                setLoading(false);
-            })
 
+const AboutMe = () => {
+
+    const [loading, setLoading] = useState(true);
+    const [heroName, setHeroName] = useState(() =>{
+        const localData = localStorage.getItem("heroName");
+        if (localData) {
+            const storeDate = JSON.parse(localData)
+            const time = Date.now()
+            const days = 30*24*60*60*1000
+
+            if(time - storeDate.timestamp < days){
+                return storeDate.heroName
+            }
+        }
+        return []
+    });
+
+async function getHero() {
+    const id = Math.floor(Math.random() * 10) + 1
+    const res = await fetch(`https://sw-info-api.herokuapp.com/v1/peoples/${id}`)
+    const data = await res.json()
+    setHeroName(data.map(item => item.name))
+}
+
+
+    useEffect(() => {
+        getHero().then(() => console.log('LOADED'))
     }, [])
+
+    useEffect(() => {
+        localStorage.setItem('heroName', JSON.stringify({
+            heroName:heroName,
+            timestamp:Date.now()
+        }))
+    }, [heroName]);
 
 
     if(loading){
