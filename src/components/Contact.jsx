@@ -2,62 +2,47 @@ import React, {useEffect, useState} from 'react';
 
 const Contact = () => {
 
-    const [planets, setPlanets] = useState(() => {
+    const [planets, setPlanets] = useState(null)
+
+
+    useEffect(() => {
         const localData = localStorage.getItem("planets");
+        const time = Date.now()
+        const days = 30 * 24 * 60 * 60 * 1000
+
         if (localData) {
             const storeDate = JSON.parse(localData)
-            const time = Date.now()
-            const days = 30*24*60*60*1000
-
-            if(time - storeDate.timestamp < days){
-                return storeDate.planets
+            if (time - storeDate.timestamp < days) {
+                setPlanets(storeDate.planets)
+                return
             }
         }
-          return []
-    });
-    // const [loading, setLoading] = useState(true);
-
 
     async function getPlanets() {
+    try {
         const res = await fetch(`https://sw-info-api.herokuapp.com/v1/planets`)
         const data = await res.json()
-        setPlanets(data.map(item => item.name ))
-    }
-
-    useEffect( () => {
-            getPlanets().then(() => console.log('Were loaded'))
-         }, [])
-
-    useEffect( () => {
+        const name = data.map(item => item.name);
+        setPlanets(name)
         localStorage.setItem('planets', JSON.stringify({
-            planets:planets,
-            timestamp:Date.now()
+            planets: name,
+            timestamp: Date.now()
         }))
-    }, [planets])
+    }catch (er){
+        console.log('ERROR', er)
+    }}
+        getPlanets()
+
+    }, []);
 
 
 
-
-
-            // .then(res => res.json())
-            // .then(data => { setPlanetName(data) ; setLoading(false) })
-            // .catch(err => {
-            //     console.log(err)
-            //     setPlanetName('ERROR')
-            //     setLoading(false);
-            // })
-
-
-
-
-    // if(loading){
-    //     return <div>
-    //         <span className="spinner-border spinner-border-sm"></span>
-    //         Loading..
-    //     </div>;
-    // }
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();}
+    if(!planets){
+        return <div>
+            <span className="spinner-border spinner-border-sm"></span>
+            Loading..
+        </div>;
+    }
 
 
 

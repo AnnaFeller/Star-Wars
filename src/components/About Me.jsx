@@ -2,43 +2,46 @@ import React, {useEffect, useState} from 'react';
 
 
 const AboutMe = () => {
-
     const [loading, setLoading] = useState(true);
-    const [heroName, setHeroName] = useState(() =>{
-        const localData = localStorage.getItem("heroName");
-        if (localData) {
-            const storeDate = JSON.parse(localData)
-            const time = Date.now()
-            const days = 30*24*60*60*1000
+    const [heroName, setHeroName] = useState(null)
 
+    useEffect(() => {
+        const localData = localStorage.getItem("heroName");
+        const time = Date.now()
+        const days = 30*24*60*60*1000
+
+        if (localData) {
+            const storeDate  = JSON.parse(localData)
             if(time - storeDate.timestamp < days){
-                return storeDate.heroName
+                setHeroName(storeDate.heroName)
+                setLoading(false);
+                return
             }
         }
-        return []
-    });
 
-async function getHero() {
-    const id = Math.floor(Math.random() * 10) + 1
-    const res = await fetch(`https://sw-info-api.herokuapp.com/v1/peoples/${id}`)
-    const data = await res.json()
-    setHeroName(data.map(item => item.name))
-}
+        async function getHero() {
+            try {
+                const id = Math.floor(Math.random() * 10) + 1;
+                const res = await fetch(`https://sw-info-api.herokuapp.com/v1/peoples/${id}`);
+                const data = await res.json();
+                setHeroName(data);
+                localStorage.setItem("heroName", JSON.stringify({
+                    heroName: data,
+                    timestamp: Date.now()
+                }));
+                setLoading(false);
+            } catch (err) {
+                console.error('ERROR', err);
+                setLoading(false);
+            }
+        }
+        getHero()
+
+    },[]);
 
 
-    useEffect(() => {
-        getHero().then(() => console.log('LOADED'))
-    }, [])
 
-    useEffect(() => {
-        localStorage.setItem('heroName', JSON.stringify({
-            heroName:heroName,
-            timestamp:Date.now()
-        }))
-    }, [heroName]);
-
-
-    if(loading){
+    if(loading || !heroName) {
         return <div>
             <span className="spinner-border spinner-border-sm"></span>
             Loading..
