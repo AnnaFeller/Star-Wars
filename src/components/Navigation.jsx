@@ -5,7 +5,8 @@ import {navItems} from "../utils/constant.js";
 const Navigation = ({changePage}) => {
     return (
         <nav>
-            <ul className="nav fixed-top">
+            <ul className="fixed top-1 left-12 flex gap-1">
+                {/*gap=отступ*/}
                 {navItems.map(item => <NavItem changePage={changePage} itemTitle={item} key={item} />)}
 
 

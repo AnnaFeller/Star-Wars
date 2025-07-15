@@ -1,7 +1,7 @@
 
 const NavItem = ({itemTitle, changePage}) => {
     return (
-        <li onClick={()=> changePage(itemTitle)} className="nav-item btn btn-danger mx-1">{itemTitle}</li>
+        <li onClick={()=> changePage(itemTitle)} className="bg-red-color border-black border-2 rounded-md px-2 py-1 cursor-pointer hover:bg-yellow-500 hover:text-white">{itemTitle}</li>
     );
 };
 

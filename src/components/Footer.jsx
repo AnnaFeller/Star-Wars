@@ -1,9 +1,9 @@
 
 const Footer = () => {
     return (
-        <footer className="p-5 rounded-bottom-4 row">
-            <div className="btn btn-danger col-sm-2 offset-sm-2">Send me an <span
-                className="text-black text">email</span></div>
+        <footer className=" bottom-0 left-0 w-full  bg-grey-color py-4 text-center">
+            <button className="bg-red-color border-black border-1 rounded-md px-1 py-1 cursor-pointer hover:bg-yellow-500 hover:text-white">Send me an
+                <span className="text-yellow "> email</span></button>
         </footer>
     );
 };

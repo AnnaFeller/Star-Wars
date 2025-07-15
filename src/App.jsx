@@ -11,7 +11,8 @@ function App() {
 
     return (
 
-        <div className="container">
+        <div
+        >
             <Header changePage={setPage} />
             <Main page={page}/>
             <Footer/>
