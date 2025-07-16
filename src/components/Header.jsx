@@ -1,10 +1,11 @@
 import Navigation from "./Navigation.jsx";
 
 
-const Header = ({changePage}) => {
+
+const Header = () => {
     return (
         <header className="rounded-t-3xl bg-grey-color">
-           <Navigation changePage={changePage} />
+           <Navigation  />
             {/*// передаем пропс по линии с хедер*/}
             <h1 className="text-center text-3xl py-6">Luke Skywalker</h1>
         </header>
